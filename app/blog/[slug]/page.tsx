@@ -20,8 +20,7 @@ async function getData(slug:string) {
 
 export default async function BlogArticle({ params } : { params: { slug: string } }) {
 
-    const { slug } = await params
-    const data : FullBlog = await getData(slug);
+    const data : FullBlog = await getData(params.slug);
 
     return (
         <div className="mt-8">
