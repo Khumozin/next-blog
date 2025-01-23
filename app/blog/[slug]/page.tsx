@@ -3,6 +3,8 @@ import { client, urlFor } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 
+export const revalidate = 30; // revalidate at most 30 seconds
+
 type TParams = Promise<{ slug: string }>;
 
 async function getData(slug:string) {
