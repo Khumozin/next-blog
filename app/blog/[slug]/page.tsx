@@ -3,6 +3,8 @@ import { client, urlFor } from "@/app/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 
+type TParams = Promise<{ slug: string }>;
+
 async function getData(slug:string) {
     const query = `
     *[_type == 'blog' && slug.current == '${slug}'] {
@@ -18,9 +20,10 @@ async function getData(slug:string) {
     return data;
 }
 
-export default async function BlogArticle({ params } : { params: { slug: string } }) {
+export default async function BlogArticle({ params } : { params: TParams }) {
 
-    const data : FullBlog = await getData(params.slug);
+    const { slug } = await params
+    const data : FullBlog = await getData(slug);
 
     return (
         <div className="mt-8">
